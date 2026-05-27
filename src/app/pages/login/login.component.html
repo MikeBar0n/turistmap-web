@@ -1,0 +1,45 @@
+<div class="login-wrapper">
+    <mat-card class="login-card">
+        <mat-card-header>
+            <mat-card-title>
+                <mat-icon class="logo-icon">map</mat-icon>
+                TuristMap
+            </mat-card-title>
+            <mat-card-subtitle>Inicia sesion en tu cuenta</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="form" (ngSubmit)="login()">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" placeholder="tu@email.com">
+                    <mat-icon matSuffix>email</mat-icon>
+                    @if (form.get('email')?.hasError('required')) {
+                    <mat-error>El email es obligatorio</mat-error>
+                    }
+                    @if (form.get('email')?.hasError('email')) {
+                    <mat-error>Ingresa un email valido</mat-error>
+                    }
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Contrasena</mat-label>
+                    <input matInput [type]="ocultarPassword ? 'password' : 'text'" formControlName="password">
+                    <button mat-icon-button matSuffix type="button" (click)="ocultarPassword = !ocultarPassword">
+                        <mat-icon>{{ ocultarPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    </button>
+                    @if (form.get('password')?.hasError('required')) {
+                    <mat-error>La contrasena es obligatoria</mat-error>
+                    }
+                </mat-form-field>
+                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || cargando"
+                    class="full-width btn-login">
+                    {{ cargando ? 'Ingresando...' : 'Iniciar sesion' }}
+                </button>
+            </form>
+        </mat-card-content>
+        <mat-card-footer>
+            <p class="registro-link">No tienes cuenta?
+                <a routerLink="/registro">Registrate aqui</a>
+            </p>
+        </mat-card-footer>
+    </mat-card>
+</div>
