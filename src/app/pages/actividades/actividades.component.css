@@ -1,0 +1,48 @@
+.actividad-card {
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.actividad-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.descripcion {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 8px 0 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #555;
+}
+
+.info-row mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.precio {
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+.duracion,
+.cupo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

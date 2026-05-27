@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Destinos Turisticos</h1>
+        @if (esAdmin) {
+        <button mat-raised-button color="primary" routerLink="/destinos/nuevo">
+            <mat-icon>add</mat-icon> Nuevo Destino
+        </button>
+        }
+    </div>
+    @if (destinos.length === 0) {
+    <div class="empty-state">
+        <mat-icon>place</mat-icon>
+        <p>No hay destinos disponibles aun.</p>
+    </div>
+    }
+    <div class="card-grid">
+        @for (destino of destinos; track destino._id) {
+        <mat-card class="destino-card">
+            <mat-card-header>
+                <mat-card-title>{{ destino.nombre }}</mat-card-title>
+                <mat-card-subtitle>
+                    {{ destino.ubicacion.ciudad }}, {{ destino.ubicacion.departamento }}
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="descripcion">{{ destino.descripcion }}</p>
+                <div class="meta">
+                    <span [class]="'badge badge-' + destino.categoria">{{ destino.categoria }}</span>
+                    <span class="calificacion">{{ getCalificacion(destino.calificacion || 0) }} {{ destino.calificacion
+                        }}/5</span>
+                </div>
+            </mat-card-content>
+            @if (esAdmin) {
+            <mat-card-actions>
+                <button mat-button color="primary" [routerLink]="['/destinos/editar', destino._id]">
+                    <mat-icon>edit</mat-icon> Editar
+                </button>
+                <button mat-button color="warn" (click)="eliminar(destino._id!)">
+                    <mat-icon>delete</mat-icon> Eliminar
+                </button>
+            </mat-card-actions>
+            }
+        </mat-card>
+        }
+    </div>
+</div>
