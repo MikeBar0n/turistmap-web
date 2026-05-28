@@ -7,6 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActividadService } from '../../core/services/actividad.service';
 import { Actividad } from '../../core/models/interfaces';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AgregarItinerarioDialogComponent } from '../../shared/agregar-itinerario-dialog/agregar-itinerario-dialog.component';
 import { filter } from 'rxjs';
 
 @Component({
@@ -25,7 +27,8 @@ export class ActividadesComponent implements OnInit {
     constructor(
         private actividadService: ActividadService,
         private snackBar: MatSnackBar,
-        private router: Router
+        private router: Router,
+        private dialog: MatDialog
     ) { }
     ngOnInit() {
         this.esAdmin = localStorage.getItem('rol') === 'administrador';
@@ -53,5 +56,13 @@ export class ActividadesComponent implements OnInit {
                 error: () => this.snackBar.open('Error al eliminar', 'Cerrar', { duration: 3000 })
             });
         }
+    }
+    getEstaLogueado(): boolean {
+        return !!localStorage.getItem('token');
+    }
+    agregarAItinerario(actividad: Actividad) {
+        this.dialog.open(AgregarItinerarioDialogComponent, {
+            data: { nombre: actividad.nombre, id: actividad._id, tipo: 'actividad' }
+        });
     }
 }

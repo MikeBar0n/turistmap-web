@@ -42,16 +42,21 @@
                     </span>
                 </div>
             </mat-card-content>
-            @if (esAdmin) {
             <mat-card-actions>
+                @if (esAdmin) {
                 <button mat-button color="primary" [routerLink]="['/actividades/editar', actividad._id]">
                     <mat-icon>edit</mat-icon> Editar
                 </button>
                 <button mat-button color="warn" (click)="eliminar(actividad._id!)">
                     <mat-icon>delete</mat-icon> Eliminar
                 </button>
+                }
+                @if (getEstaLogueado() && !esAdmin) {
+                <button mat-button color="accent" (click)="agregarAItinerario(actividad)">
+                    <mat-icon>bookmark_add</mat-icon> Agregar a itinerario
+                </button>
+                }
             </mat-card-actions>
-            }
         </mat-card>
         }
     </div>
