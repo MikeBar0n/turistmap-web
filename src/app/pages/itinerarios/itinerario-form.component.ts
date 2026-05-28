@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ItinerarioService } from '../../core/services/itinerario.service';
 
@@ -25,6 +26,7 @@ import { ItinerarioService } from '../../core/services/itinerario.service';
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
   ],
   template: `
     <div class="container">
