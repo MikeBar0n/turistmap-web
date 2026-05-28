@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActividadService } from '../../core/services/actividad.service';
 import { Actividad } from '../../core/models/interfaces';
+import { filter } from 'rxjs';
+
 @Component({
     selector: 'app-actividades',
     standalone: true,
@@ -22,11 +24,18 @@ export class ActividadesComponent implements OnInit {
     esAdmin = false;
     constructor(
         private actividadService: ActividadService,
-        private snackBar: MatSnackBar
+        private snackBar: MatSnackBar,
+        private router: Router
     ) { }
     ngOnInit() {
         this.esAdmin = localStorage.getItem('rol') === 'administrador';
         this.cargarActividades();
+
+        this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd)
+        ).subscribe(() => {
+            this.cargarActividades();
+        });
     }
     cargarActividades() {
         this.actividadService.getActividades().subscribe({
